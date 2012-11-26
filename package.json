@@ -1,0 +1,21 @@
+{
+    "name": "seer",
+    "version": "0.0.0",
+    "description": "Sample project for testing Backbone. Seer is meaning in mongolian language that backbone.",
+    "author": {
+        "name": "j",
+        "email": "khaschuluu.m@gmail.com"
+    },
+    "contributors": [
+        {
+            "name": "Subota",
+            "email": "byambadorj.batsukh@gmail.com"
+        }
+    ],
+    "dependencies": {
+        "express": "3.0.2",
+        "jade": "0.27.7",
+        "mongoq": "0.2.3"
+    },
+    "engine": "node 0.6.12"
+}
