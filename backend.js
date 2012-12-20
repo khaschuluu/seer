@@ -16,6 +16,14 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+app.get('/post', function(req, res) {
+    res.render('posts');
+});
+
+app.get('/post/:id', function(req, res) {
+    res.render('post', {id: req.params.id});
+});
+
 // Add score
 app.post('/api/scores', function(req, res) {
     var score = req.body;
@@ -53,6 +61,47 @@ app.put('/api/scores/:id', function(req, res) {
 app.del('/api/scores/:id', function(req, res) {
     db.collection('scores').remove({id: req.params.id}, {safe: true}).done(function(success) {
         res.json(success ? 200 : 404);
+    });
+});
+
+app.get('/api/post', function(req, res) {
+    db.collection('posts').find().toArray().done(function(posts) {
+        res.json(posts);
+    });
+});
+
+app.get('/api/post/:id', function(req, res) {
+    db.collection('posts').findOne({id: req.params.id}).done(function(post) {
+        res.json(post);
+    });
+});
+
+app.post('/api/post', function(req, res) {
+    var new_post = req.body;
+    new_post.id = Date.now().toString(); // You probably want to swap this for something like https://github.com/dylang/shortid
+
+    db.collection('posts').insert(new_post, {safe: true}).done(function(post) {
+        res.json(post, 201);
+    });
+});
+
+app.put('/api/post/:id', function(req, res) {
+    var post = req.body;
+
+    db.collection('posts').update({id: req.params.id}, {$set: post}, {safe: true}).done(function(success) {
+        res.json(success ? 200 : 404);
+    });
+});
+
+app.del('/api/post/:id', function(req, res) {
+    db.collection('posts').remove({id: req.params.id}, {safe: true}).done(function(success) {
+        res.json(success ? 200 : 404);
+    });
+});
+
+app.get('/api/comment/:pid', function(req, res) {
+    db.collection('comments').findOne({post_id: req.params.id}).done(function(post) {
+        res.json(post);
     });
 });
 
