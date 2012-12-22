@@ -64,6 +64,8 @@ app.del('/api/scores/:id', function(req, res) {
     });
 });
 
+// REST API for Posts ---------------------------------------------------------
+
 app.get('/api/post', function(req, res) {
     db.collection('posts').find().toArray().done(function(posts) {
         res.json(posts);
@@ -100,8 +102,17 @@ app.del('/api/post/:id', function(req, res) {
 });
 
 app.get('/api/comment/:pid', function(req, res) {
-    db.collection('comments').findOne({post_id: req.params.id}).done(function(post) {
-        res.json(post);
+    db.collection('comments').find({post_id: req.params.id}).toArray().done(function(comments) {
+        res.json(comments);
+    });
+});
+
+app.post('/api/comment', function(req, res) {
+    var new_comment = req.body;
+    new_comment.id = Date.now().toString(); // You probably want to swap this for something like https://github.com/dylang/shortid
+
+    db.collection('comments').insert(new_comment, {safe: true}).done(function(comment) {
+        res.json(comment, 201);
     });
 });
 

@@ -2,7 +2,27 @@ doctype 5
 html(lang="en")
 body
     #container
+        input(type='text', name='title')
+        input(type='text', name='text')
+        button(id='post_submit')
+            | Add post
     script(src='js/jquery.js')
     script(src='js/underscore.js')
     script(src='js/backbone.js')
+    script(id='post_template', type='text/template')
+        | <div class='post'>
+        |  <div class='post_title'>
+        |   <%- title %>
+        |  </div>
+        |  <div class='post_text'>
+        |   <%- text %>
+        |  </div>
+        |  <div class='post_comments'>
+        |   <% for (var n in comments) { %>
+        |    <div class='post_comment'>
+        |     <%- comments[n].text %>
+        |    </div>
+        |   <% } %>
+        |  </div>
+        | </div>
     script(src='js/post.js')
