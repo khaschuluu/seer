@@ -24,6 +24,10 @@ app.get('/post/:id', function(req, res) {
     res.render('post', {id: req.params.id});
 });
 
+app.get('/vitafit', function(req, res) {
+    res.render('vitafit');
+});
+
 // Add score
 app.post('/api/scores', function(req, res) {
     var score = req.body;
@@ -116,18 +120,11 @@ app.post('/api/comment', function(req, res) {
     });
 });
 
-app.get('/api/check', function(req, res) {
-    if(Math.floor(Math.random()*9)%2) {
-        var num = ''+parseInt(Math.random()*100000000);
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', num.length);
-        res.end(num);
-    } else {
-        var num = '0';
-        res.setHeader('Content-Type', 'text/plain');
-        res.setHeader('Content-Length', num.length);
-        res.end('0');
-    }
+app.get('/api/check/:id', function(req, res) {
+    if(Math.floor(Math.random()*9)%2)
+        res.json({phone: parseInt(Math.random()*100000000)});
+    else
+        res.json({phone: 0});
 });
 
 
