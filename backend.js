@@ -116,4 +116,19 @@ app.post('/api/comment', function(req, res) {
     });
 });
 
+app.get('/api/check', function(req, res) {
+    if(Math.floor(Math.random()*9)%2) {
+        var num = ''+parseInt(Math.random()*100000000);
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Length', num.length);
+        res.end(num);
+    } else {
+        var num = '0';
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Length', num.length);
+        res.end('0');
+    }
+});
+
+
 app.listen(8080);
