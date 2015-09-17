@@ -30,7 +30,7 @@ $(function() {
         },
         url: function() {
             pid = this.options.pid || 1;
-            return '/api/comment/'+pid+'/'
+            return '/api/comment/'+pid+'/';
         }
     });
 

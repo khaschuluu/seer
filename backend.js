@@ -1,5 +1,5 @@
 var express = require('express'),
-    mongoq = require('mongoq')
+    mongoq = require('mongoq'),
     fs = require('fs'),
     util = require('util');
 
